@@ -1,12 +1,12 @@
 <div class="review-container">
-  <p>Cra 5 #1-28, Centro, Popayán, Cauca</p>
+  <p>797X+38, Sotará, Cauca</p>
   <div class="rating">
-    <span>4.5 ★★★★★</span>
-    <span>3,372 opiniones</span>
+    <span>5.0 ★★★★★</span>
+    <span>3 opiniones</span>
   </div>
   <div class="actions">
-    <a href="https://g.co/kgs/zzhRF6J" target="_blank" rel="noopener noreferrer"  class="btn">Cómo llegar</a>
-    <a href="https://g.co/kgs/zzhRF6J" target="_blank" rel="noopener noreferrer"  class="btn">Ampliar el mapa</a>
+    <a href="https://maps.app.goo.gl/9jNwJYEUZaEbSUNWA" target="_blank" rel="noopener noreferrer"  class="btn">Cómo llegar</a>
+    <a href="https://maps.app.goo.gl/9jNwJYEUZaEbSUNWA" target="_blank" rel="noopener noreferrer"  class="btn">Ampliar el mapa</a>
   </div>
 </div>
 <style>

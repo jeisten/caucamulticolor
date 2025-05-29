@@ -5,8 +5,8 @@
     <span>17,062 opiniones</span>
   </div>
   <div class="actions">
-    <a href="https://maps.app.goo.gl/omb7AYN5x55hS4KbA" class="btn">Cómo llegar</a>
-    <a href="https://maps.app.goo.gl/omb7AYN5x55hS4KbA" class="btn">Ampliar el mapa</a>
+    <a href="https://maps.app.goo.gl/omb7AYN5x55hS4KbA" target="_blank" rel="noopener noreferrer"  class="btn">Cómo llegar</a>
+    <a href="https://maps.app.goo.gl/omb7AYN5x55hS4KbA" target="_blank" rel="noopener noreferrer"  class="btn">Ampliar el mapa</a>
   </div>
 </div>
 <style>

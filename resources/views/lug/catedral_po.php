@@ -1,12 +1,13 @@
 <div class="review-container">
-  <p>Cra 5 #1-28, Centro, Popayán, Cauca</p>
+  <p>Cl. 5a, Centro, Popayán, Cauca</p>
   <div class="rating">
-    <span>4.5 ★★★★★</span>
-    <span>3,372 opiniones</span>
+    <span>4.8 ★★★★★</span>
+    <span>633 opiniones</span>
   </div>
   <div class="actions">
-    <a href="https://g.co/kgs/zzhRF6J" target="_blank" rel="noopener noreferrer"  class="btn">Cómo llegar</a>
-    <a href="https://g.co/kgs/zzhRF6J" target="_blank" rel="noopener noreferrer"  class="btn">Ampliar el mapa</a>
+    <a href="https://maps.app.goo.gl/AsN7WVuMEt2cQH8P9" target="_blank" rel="noopener noreferrer"  class="btn">Cómo llegar</a>
+    <a href="https://maps.app.goo.gl/AsN7WVuMEt2cQH8P9" target="_blank" rel="noopener noreferrer"  class="btn">Ampliar el mapa</a>
+   
   </div>
 </div>
 <style>
