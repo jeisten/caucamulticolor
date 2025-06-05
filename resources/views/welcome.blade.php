@@ -41,6 +41,8 @@
     <main class="container mx-auto py-3 content-container">
         
         @include('layouts.body')
+        @include('layouts.asistente')
+        
     </main>
 
    @include('layouts.footer')

@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BuscarController;
+use App\Http\Controllers\ChatController;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::post('/ask', [ChatController::class, 'ask'])->name('ask');
 //// para redigir a la pagina de lugares turisticos
 Route::get('/lug-turis', function () {
     return view('lug_turis');
