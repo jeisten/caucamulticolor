@@ -59,6 +59,7 @@
       <div class="custom-rectangle shadow-md">
         <h2 class="text-3xl font-bold mb-6 text-center">Descubre el cauca y sus maravillas</h2>
       </div>
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-white shadow rounded-lg overflow-hidden">
           <img src="https://extra.com.co/wp-content/uploads/2024/09/photo0jpg.jpg" alt="Noticia 1" class="w-full h-48 object-cover">

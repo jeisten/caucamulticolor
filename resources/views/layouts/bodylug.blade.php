@@ -20,6 +20,19 @@
       height: 100%;
       object-fit: cover;
     }
+    .custom-rectangle {
+        @apply bg-white p-4 mb-4 rounded-lg text-center shadow-md;
+      }
+
+      .map-container {
+        @apply w-full h-full;
+      }
+
+      gmp-map {
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
     
   </style>
 </head>
@@ -27,9 +40,33 @@
 
   <!-- Contenido principal -->
   <main class="container mx-auto py-12 content-container">
-          <div class="custom-rectangle shadow-md">
-        <h2 class="text-3xl font-bold mb-2 text-center">Descubre destinos que enamoran. </h2>
+    <div class="custom-rectangle shadow-md">
+        <h2 class="text-3xl font-bold mb-5 text-center">Descubre destinos que enamoran. </h2>
+        </div>
+        <div>
+          <gmpx-api-loader key="AIzaSyAn__pGRp8IDUCWNDMl3W0F-dqUzHC0Xw8" solution-channel="GMP_GE_mapsandplacesautocomplete_v2"></gmpx-api-loader>
+        <main>
+     
+      <div>
+        <button id="toggle-map-btn" class="bg-yellow-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-yellow-600 transition m-[5px]">
+          Descubre tus destinos 
+        </button>
+        <div id="map-container" class="flex flex-1 overflow-hidden h-3/4 mt-4 hidden m-[20px]">
+          <div class="w-1/4 bg-gray-100 p-3 overflow-y-auto border-r border-gray-300">
+            <gmpx-place-picker placeholder="Ingresa una dirección" class="w-full"></gmpx-place-picker>
+            <div id="place-details" class="mt-3 p-3 bg-white border border-gray-300 rounded">
+              <!-- Los detalles del lugar y el clima se mostrarán aquí -->
+            </div>
+          </div>
+          <div class="w-3/4 map-container">
+            <gmp-map center="2.43867,-76.6072" zoom="13" map-id="DEMO_MAP_ID">
+              <gmp-advanced-marker></gmp-advanced-marker>
+            </gmp-map>
+          </div>
+        </div>
       </div>
+    </main>
+        </div>
     <!-- Sección de noticias -->
     <section class="mb-12">
 
@@ -263,6 +300,119 @@
 
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+      async function init() {
+        try {
+          await customElements.whenDefined('gmp-map');
+
+          const map = document.querySelector('gmp-map');
+          const marker = document.querySelector('gmp-advanced-marker');
+          const placePicker = document.querySelector('gmpx-place-picker');
+          const infowindow = new google.maps.InfoWindow();
+          const placeDetails = document.querySelector('#place-details');
+
+          if (!map) {
+            console.error("El elemento gmp-map no se encontró en el DOM.");
+            return;
+          }
+
+          map.innerMap.setOptions({
+            mapTypeControl: false
+          });
+
+          placePicker.addEventListener('gmpx-placechange', async () => {
+            const place = placePicker.value;
+
+            if (!place.location) {
+              window.alert(
+                "No details available for input: '" + place.name + "'"
+              );
+              infowindow.close();
+              marker.position = null;
+              placeDetails.innerHTML = '';
+              return;
+            }
+
+            if (place.viewport) {
+              map.innerMap.fitBounds(place.viewport);
+            } else {
+              map.center = place.location;
+              map.zoom = 17;
+            }
+
+            marker.position = place.location;
+            infowindow.setContent(
+              `<strong>${place.displayName}</strong><br>
+               <span>${place.formattedAddress}</span>`
+            );
+            infowindow.open(map.innerMap, marker);
+
+            const weatherData = await fetchWeatherData(place.location.lat, place.location.lng);
+            updatePlaceDetails(place, weatherData);
+          });
+        } catch (error) {
+          console.error("Error al inicializar el mapa:", error);
+        }
+      }
+
+      async function fetchWeatherData(lat, lng) {
+        const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&lang=es&appid=${apiKey}`;
+        
+        try {
+          const response = await fetch(url);
+          if (!response.ok) throw new Error('Error al obtener los datos del clima');
+          const data = await response.json();
+          return {
+            temperature: data.main.temp,
+            description: data.weather[0].description,
+            updated: new Date(data.dt * 1000).toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' })
+          };
+        } catch (error) {
+          console.error(error);
+          return null;
+        }
+      }
+
+      function updatePlaceDetails(place, weatherData) {
+        const placeDetails = document.querySelector('#place-details');
+        if (weatherData) {
+          placeDetails.innerHTML = `
+            <strong>${place.displayName}</strong><br>
+            <span>${place.formattedAddress}</span><br>
+            <span>Clima: ${weatherData.temperature}°C - ${weatherData.description}</span><br>
+            <span>Actualizado: ${weatherData.updated}</span>
+          `;
+        } else {
+          placeDetails.innerHTML = `
+            <strong>${place.displayName}</strong><br>
+            <span>${place.formattedAddress}</span><br>
+            <span>No se pudieron obtener los datos del clima.</span>
+          `;
+        }
+      }
+
+      function toggleMap() {
+        const mapContainer = document.getElementById('map-container');
+        const map = document.querySelector('gmp-map');
+        mapContainer.classList.toggle('hidden');
+        
+        // Forzar redibujado del mapa al mostrarlo
+        if (!mapContainer.classList.contains('hidden') && map) {
+          setTimeout(() => {
+            google.maps.event.trigger(map.innerMap, 'resize');
+            map.innerMap.setCenter({ lat: 2.43867, lng: -76.6072 });
+          }, 0);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        init();
+        document.getElementById('toggle-map-btn').addEventListener('click', toggleMap);
+      });
+    </script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/@googlemaps/extended-component-library/0.6.11/index.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
 </body>
 </html>

@@ -18,6 +18,7 @@
 
 <div class="container mx-auto px-4 py-4 flex items-center justify-between bg-gray-100 shadow rounded-lg overflow-hidden border-b-2 border-blue-500">
     <nav class="hidden md:flex space-x-4 justify-center flex-1">
+        <a href="{{ url('/') }}" class="text-gray-600 font-bold hover:text-blue-600">Inicio</a>
         <a href="{{ route('lug_turis') }}" class="text-gray-600 font-bold hover:text-blue-600">Lugares Turisticos</a>
         <a href="{{ route('alojamientos') }}" class="text-gray-600 font-bold hover:text-blue-600">Alojamiento</a>
         <a href="{{ route('comida') }}" class="text-gray-600 font-bold hover:text-blue-600">Comidas Tipicas</a>
@@ -28,6 +29,7 @@
 
 <nav id="mobile-menu" class="hidden fixed top-0 right-0 w-2/3 h-full bg-white shadow-lg flex-col items-start p-6 space-y-4 z-50 md:hidden">
     <button onclick="toggleMenu()" class="self-end text-2xl">✕</button>
+    <a href="{{ url('/') }}" class="text-gray-600 font-bold hover:text-blue-600">Inicio</a>
     <div><a href="{{ route('lug_turis') }}" class="text-gray-600 hover:text-blue-600">Lugares Turisticos</a></div>
     <div><a href="{{ route('alojamientos') }}" class="text-gray-600 hover:text-blue-600">Alojamientos</a></div>
     <div><a href="{{ route('comida') }}" class="text-gray-600 hover:text-blue-600">Comidas Tipicas</a></div>

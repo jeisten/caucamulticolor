@@ -39,6 +39,7 @@
 
     <!-- Aquí va el contenido principal -->
     <main class="container mx-auto py-3 content-container">
+      @include('siti.bodysiti')
       
     </main>
 
